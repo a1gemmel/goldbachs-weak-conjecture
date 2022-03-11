@@ -59,18 +59,16 @@ func main() {
 
 	primes := primesBelow(*num)
 
-	for x := 0; x < len(primes); x++ {
-		xP := primes[x]
-		for y := x; y < len(primes); y++ {
-			yP := primes[y]
-			if xP+yP > *num {
+	for xi, x := range primes {
+
+		for yi, y := range primes[xi:] {
+			if x+y > *num {
 				break
 			}
-			for z := y; z < len(primes); z++ {
-				zP := primes[z]
-				sum := xP + yP + zP
+			for _, z := range primes[yi+xi:] {
+				sum := x + y + z
 				if sum == *num {
-					fmt.Println(xP, yP, zP)
+					fmt.Println(x, y, z)
 				}
 				if sum >= *num {
 					break
