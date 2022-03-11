@@ -57,6 +57,25 @@ func main() {
 		os.Exit(1)
 	}
 
-	fmt.Println(primesBelow(*num))
+	primes := primesBelow(*num)
 
+	for x := 0; x < len(primes); x++ {
+		xP := primes[x]
+		for y := x; y < len(primes); y++ {
+			yP := primes[y]
+			if xP+yP > *num {
+				break
+			}
+			for z := y; z < len(primes); z++ {
+				zP := primes[z]
+				sum := xP + yP + zP
+				if sum == *num {
+					fmt.Println(xP, yP, zP)
+				}
+				if sum >= *num {
+					break
+				}
+			}
+		}
+	}
 }
