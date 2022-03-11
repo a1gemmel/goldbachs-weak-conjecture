@@ -42,6 +42,31 @@ func primesBelow(n int) []int {
 	return primes
 }
 
+func goldbach(num int) [][]int {
+	primes := primesBelow(num)
+
+	solutions := [][]int{}
+
+	for xi, x := range primes {
+
+		for yi, y := range primes[xi:] {
+			if x+y > num {
+				break
+			}
+			for _, z := range primes[yi+xi:] {
+				sum := x + y + z
+				if sum == num {
+					solutions = append(solutions, []int{x, y, z})
+				}
+				if sum >= num {
+					break
+				}
+			}
+		}
+	}
+	return solutions
+}
+
 func main() {
 
 	num := flag.Int("sum", 0, "Number to sum to")
@@ -57,23 +82,9 @@ func main() {
 		os.Exit(1)
 	}
 
-	primes := primesBelow(*num)
+	solutions := goldbach(*num)
 
-	for xi, x := range primes {
-
-		for yi, y := range primes[xi:] {
-			if x+y > *num {
-				break
-			}
-			for _, z := range primes[yi+xi:] {
-				sum := x + y + z
-				if sum == *num {
-					fmt.Println(x, y, z)
-				}
-				if sum >= *num {
-					break
-				}
-			}
-		}
+	for _, s := range solutions {
+		fmt.Println(s)
 	}
 }

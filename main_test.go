@@ -13,3 +13,7 @@ func Test_PrimesBelow(t *testing.T) {
 	assert.Equal(t, []int{}, primesBelow(2))
 	assert.Equal(t, []int{2}, primesBelow(3))
 }
+
+func Test_Goldbach(t *testing.T) {
+	assert.Equal(t, [][]int{{2, 2, 7}, {3, 3, 5}}, goldbach(11))
+}
